@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/StartMenu.unity
+    guid: 47e92a03d7aa56a4a8470b47c6a8f720
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Level1.unity
+    guid: 9208a8789441e884cafae385e047ba69
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Level2.unity
+    guid: 045c9ab64f5da59469c76fed06d147d1
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Level3.unity
+    guid: 8bb2c7d3786072c44a15425d10819d50
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Level4.unity
+    guid: 5988903a698169447a9dac60cc105938
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Level5.unity
+    guid: db8ce438022b5124993d634a75933fed
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Level6.unity
+    guid: f4c4939d9a607df489bd1e31de716b66
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/Win.unity
+    guid: ab555b545ab8f7d45b476cdfbff7a38d
+  - enabled: 1
+    path: Assets/Scenes/Block Breaker Clone/GameOver.unity
+    guid: 7d26bb730c2a6e14a900fd3f1393382f
+  - enabled: 0
+    path: Assets/Scenes/Physics based ARPG/Test 2.unity
+    guid: 552a575e4bd4ea04fb5ec0cc0dac17ab
+  m_configObjects: {}
