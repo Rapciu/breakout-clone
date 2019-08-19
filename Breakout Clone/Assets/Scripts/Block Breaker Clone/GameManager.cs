@@ -82,11 +82,20 @@ public class GameManager : MonoBehaviour
 
     private void DisplayTimer()
     {
-        float seconds = timer % 60;
         int minutes = (int)timer / 60;
+        float seconds = timer % 60;
         float miliseconds = (timer - (minutes / 60 + (int)seconds)) * 1000;
 
-        timerTextComp.text = $"{minutes}m {(int)Mathf.Round(seconds)}s {(int)Mathf.Round(miliseconds)}ms";
+        int secondsRounded = (int)Mathf.Round(seconds);
+        int milisecondsRounded = (int)Mathf.Round(miliseconds);
+
+        int secondsDigitNum = secondsRounded.ToString().Length;
+        int milisecondsDigitNum = milisecondsRounded.ToString().Length;
+
+        //string gap1 = new string('0', 4 - secondsDigitNum);
+        //string gap2 = new string('0', 5 - milisecondsDigitNum);
+
+        timerTextComp.text = $"{minutes}m{secondsRounded.ToString().PadLeft(5-secondsDigitNum)}s{milisecondsRounded.ToString().PadLeft(8-milisecondsDigitNum)}ms";
     }
 
     void Start()
