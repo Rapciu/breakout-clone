@@ -1306,6 +1306,11 @@ PrefabInstance:
       propertyPath: scoreTextComp
       value: 
       objectReference: {fileID: 1604373255}
+    - target: {fileID: 3395101659180552602, guid: 86da9e020bec1134c8084c321061bb5c,
+        type: 3}
+      propertyPath: timerTextComp
+      value: 
+      objectReference: {fileID: 1604373256}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86da9e020bec1134c8084c321061bb5c, type: 3}
 --- !u!1001 &300835106
@@ -8013,6 +8018,18 @@ PrefabInstance:
 --- !u!114 &1604373255 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6940820042670229965, guid: 565cd03e0fec84d4fb72e3680f751751,
+    type: 3}
+  m_PrefabInstance: {fileID: 1604373254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1604373256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 626630611416754793, guid: 565cd03e0fec84d4fb72e3680f751751,
     type: 3}
   m_PrefabInstance: {fileID: 1604373254}
   m_PrefabAsset: {fileID: 0}
