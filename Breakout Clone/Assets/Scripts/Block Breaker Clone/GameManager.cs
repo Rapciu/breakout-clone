@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     Ball ballComp;
 
     bool paused = false;
+    bool updateTimer = true;
+    bool showGUI = true;
 
     private void PauseGame()
     {
@@ -99,13 +101,29 @@ public class GameManager : MonoBehaviour
         timerTextComp.text = $"{minutes}m{seconds.ToString().PadLeft(5 - secondsDigitNum)}s";
     }
 
+    private void Awake()
+    {
+        int gameMainObjCount = FindObjectsOfType<GameManager>().Length;
+
+        if (gameMainObjCount > 1)
+        {
+            // Deactivate the object so the scene doesn't have 2 game managers for a moment
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     void Start()
     {
         sceneLoaderComp = sceneLoader.GetComponent<SceneLoader>();
         ballComp = ball.GetComponent<Ball>();
 
         //scoreTextComp = gameCanvas.GetComponentInChildren<TextMeshProUGUI>();
-        DisplayScore();
+        //DisplayScore();
     }
 
     void Update()
@@ -114,10 +132,16 @@ public class GameManager : MonoBehaviour
         ResetGame();
         ChangeSpeed();
 
-        UpdateTimer();
+        if (updateTimer)
+        {
+            UpdateTimer();
+        }
 
-        DisplayScore();
-        DisplayTimer();
+        if (showGUI)
+        {
+            DisplayScore();
+            DisplayTimer();
+        }
 
         ballComp.SpawnBall();
     }

@@ -38,6 +38,7 @@ public class Ball : MonoBehaviour
         rb.MovePosition(ballPos);
     }
 
+    //TODO: Move it to game manager script instead maybe
     public void SpawnBall()
     {
         if (Input.GetMouseButtonDown(1) && launched)
@@ -56,6 +57,7 @@ public class Ball : MonoBehaviour
         collisionSound.PlayOneShot(launchSound);
     }
 
+    //TODO: Move it to game manager script instead maybe
     private void Launch()
     {
         if (Input.GetMouseButtonDown(0))
