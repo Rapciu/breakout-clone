@@ -27,6 +27,22 @@ public class GameManager : MonoBehaviour
     bool updateTimer = true;
     bool showGUI = true;
 
+    void ConfigureSingleton()
+    {
+        int gameMainObjCount = FindObjectsOfType<GameManager>().Length;
+
+        if (gameMainObjCount > 1)
+        {
+            // Deactivate the object so the scene doesn't have 2 game managers for a moment
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     private void PauseGame()
     {
         if (Input.GetKeyUp(KeyCode.Space))
@@ -103,18 +119,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        int gameMainObjCount = FindObjectsOfType<GameManager>().Length;
-
-        if (gameMainObjCount > 1)
-        {
-            // Deactivate the object so the scene doesn't have 2 game managers for a moment
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
+        ConfigureSingleton();
     }
 
     void Start()
