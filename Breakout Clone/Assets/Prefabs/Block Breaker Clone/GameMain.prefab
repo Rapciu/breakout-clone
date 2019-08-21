@@ -50,7 +50,7 @@ MonoBehaviour:
   scoreTextComp: {fileID: 7061811450960860317}
   timerTextComp: {fileID: 783655128336578361}
   gameSpeed: 1
-  pointsPerBlock: 100
+  pointsPerBlock: 10
   currentPoints: 0
   timer: 0
 --- !u!1001 &167239117917887824
@@ -175,15 +175,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1633168352113543258, guid: 565cd03e0fec84d4fb72e3680f751751,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8567984205288003747, guid: 565cd03e0fec84d4fb72e3680f751751,
         type: 3}
       propertyPath: m_TagString
       value: ScoreText
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633168352113543258, guid: 565cd03e0fec84d4fb72e3680f751751,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 565cd03e0fec84d4fb72e3680f751751, type: 3}

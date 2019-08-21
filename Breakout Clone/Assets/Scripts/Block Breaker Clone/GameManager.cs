@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     // Config Parameters
     [Range(0.1f, 10f)] [SerializeField] float gameSpeed = 1f;
-    [SerializeField] int pointsPerBlock = 100;
+    [SerializeField] int pointsPerBlock = 10;
 
     //Game State Variables
     [SerializeField] int currentPoints = 0;
@@ -95,7 +95,8 @@ public class GameManager : MonoBehaviour
 
     private void DisplayScore()
     {
-        scoreTextComp.text = Mathf.Round(CalculateScore()).ToString();
+        //scoreTextComp.text = Mathf.Round(CalculateScore()).ToString();
+        scoreTextComp.text = currentPoints.ToString();
     }
 
     private void DisplayTimer()
