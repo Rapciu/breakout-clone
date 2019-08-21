@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     // Objects and Components the Game Manager manages
     [SerializeField] GameObject sceneLoader;
+    [SerializeField] GameObject gameCanvas;
     [SerializeField] GameObject ball;
 
     //[SerializeField] GameObject gameCanvas;
     [SerializeField] TextMeshProUGUI scoreTextComp;
     [SerializeField] TextMeshProUGUI timerTextComp;
+    [SerializeField] TextMeshProUGUI levelTextComp;
 
     // Config Parameters
     [Range(0.1f, 10f)] [SerializeField] float gameSpeed = 1f;
@@ -24,14 +26,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] int currentPoints = 0;
     [SerializeField] float timer = 0f;
 
-    GameObject gameCanvas;
-
     SceneLoader sceneLoaderComp;
     Ball ballComp;
 
     bool paused = false;
     bool updateTimer = true;
-    bool showGUI = true;
+    public bool showGUI = true;
 
     void ConfigureSingleton()
     {
@@ -51,8 +51,6 @@ public class GameManager : MonoBehaviour
 
     void ManageCanvas(Scene scene)
     {
-        if (gameCanvas == null) return;
-
         bool isNoGUIScene = System.Array.Exists(noGameSceneIndexes, index => index == scene.buildIndex);
 
         if (isNoGUIScene)
@@ -66,6 +64,8 @@ public class GameManager : MonoBehaviour
             gameCanvas.SetActive(true);
             showGUI = true;
             updateTimer = true;
+
+            UpdateAndDisplayLvlNum(scene);
         }
     }
 
@@ -102,6 +102,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void UpdateAndDisplayLvlNum(Scene scene)
+    {
+        levelTextComp.text = $"Level {scene.buildIndex}";
+    }
+
     public void AddPoints()
     {
         currentPoints += pointsPerBlock;
@@ -119,7 +124,7 @@ public class GameManager : MonoBehaviour
         return currentPoints / timer;
     }
 
-    private void DisplayScore()
+    public void DisplayScore()
     {
         //scoreTextComp.text = Mathf.Round(CalculateScore()).ToString();
         scoreTextComp.text = currentPoints.ToString();
@@ -170,13 +175,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gameCanvas = gameObject.transform.GetChild(0).gameObject;
-
         sceneLoaderComp = sceneLoader.GetComponent<SceneLoader>();
         ballComp = ball.GetComponent<Ball>();
 
         //scoreTextComp = gameCanvas.GetComponentInChildren<TextMeshProUGUI>();
-        //DisplayScore();
+        DisplayScore();
     }
 
     void Update()
@@ -192,7 +195,7 @@ public class GameManager : MonoBehaviour
 
         if (showGUI)
         {
-            DisplayScore();
+            //DisplayScore();
             DisplayTimer();
         }
 

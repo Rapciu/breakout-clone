@@ -18,6 +18,11 @@ public class Block : MonoBehaviour
     {
         gameManagerComp.AddPoints();
 
+        if (gameManagerComp.showGUI)
+        {
+            gameManagerComp.DisplayScore();
+        }
+
         AudioClip clip = breakSounds[Random.Range(0, breakSounds.Length)];
         AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, 0.25f);
 
