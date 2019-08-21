@@ -51,6 +51,7 @@ MonoBehaviour:
   timerTextComp: {fileID: 783655128336578361}
   gameSpeed: 1
   pointsPerBlock: 10
+  noGameSceneIndexes: 000000000700000008000000
   currentPoints: 0
   timer: 0
 --- !u!1001 &167239117917887824

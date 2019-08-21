@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    // Objects and Components the Game Manager manages
     [SerializeField] GameObject sceneLoader;
     [SerializeField] GameObject ball;
 
@@ -16,9 +18,13 @@ public class GameManager : MonoBehaviour
     [Range(0.1f, 10f)] [SerializeField] float gameSpeed = 1f;
     [SerializeField] int pointsPerBlock = 10;
 
+    [SerializeField] int[] noGameSceneIndexes;
+
     //Game State Variables
     [SerializeField] int currentPoints = 0;
     [SerializeField] float timer = 0f;
+
+    GameObject gameCanvas;
 
     SceneLoader sceneLoaderComp;
     Ball ballComp;
@@ -40,6 +46,26 @@ public class GameManager : MonoBehaviour
         else
         {
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    void ManageCanvas(Scene scene)
+    {
+        if (gameCanvas == null) return;
+
+        bool isNoGUIScene = System.Array.Exists(noGameSceneIndexes, index => index == scene.buildIndex);
+
+        if (isNoGUIScene)
+        {
+            gameCanvas.SetActive(false);
+            showGUI = false;
+            updateTimer = false;
+        }
+        else
+        {
+            gameCanvas.SetActive(true);
+            showGUI = true;
+            updateTimer = true;
         }
     }
 
@@ -118,13 +144,34 @@ public class GameManager : MonoBehaviour
         timerTextComp.text = $"{minutes}m{seconds.ToString().PadLeft(5 - secondsDigitNum)}s";
     }
 
+    //deprecated
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    ManageCanvas(level);
+    //}
+
     private void Awake()
     {
         ConfigureSingleton();
     }
 
+    private void OnEnable()
+    {
+        // Delegates the OnSceneLoaded as a event listener for when the scenes change
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    //Event listener for scene load
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Debug.Log($"Loaded scene: {scene.name} {scene.buildIndex}, mode: {mode}");
+        ManageCanvas(scene);
+    }
+
     void Start()
     {
+        gameCanvas = gameObject.transform.GetChild(0).gameObject;
+
         sceneLoaderComp = sceneLoader.GetComponent<SceneLoader>();
         ballComp = ball.GetComponent<Ball>();
 
@@ -150,5 +197,11 @@ public class GameManager : MonoBehaviour
         }
 
         ballComp.SpawnBall();
+    }
+
+    private void OnDisable()
+    {
+        //Undelegates the OnSceneLoaded when the game exists
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
