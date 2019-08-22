@@ -53,9 +53,10 @@ MonoBehaviour:
   levelTextComp: {fileID: 1510969638736853124}
   gameSpeed: 1
   pointsPerBlock: 10
-  noGameSceneIndexes: 000000000700000008000000
+  noGameSceneIndexes: 000000000100000002000000
   currentPoints: 0
   timer: 0
+  showGUI: 1
 --- !u!1001 &167239117917887824
 PrefabInstance:
   m_ObjectHideFlags: 0

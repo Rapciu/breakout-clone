@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateAndDisplayLvlNum(Scene scene)
     {
-        levelTextComp.text = $"Level {scene.buildIndex}";
+        levelTextComp.text = $"Level {scene.buildIndex-2}";
     }
 
     public void AddPoints()
