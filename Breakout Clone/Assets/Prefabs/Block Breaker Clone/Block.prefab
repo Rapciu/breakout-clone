@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eaa3556068175dc4f8d25f6f6851bf97, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 80dbf5f0cd82f7d41b7e0e05c31a9d60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,10 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92313f4895238a4d9112e6b1a1eb3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1510969639028023504, guid: 86da9e020bec1134c8084c321061bb5c,
-    type: 3}
   level: {fileID: 8057011575001004520, guid: 931b0bd43077edd4a973862b4d3f552d, type: 3}
   breakable: 1
+  spin: 0
+  spinSpeed: 2
   breakSounds:
   - {fileID: 8300000, guid: 1b5381ee8657c584ba6418d5e6f3ec0e, type: 3}
   - {fileID: 8300000, guid: 06fd73697a3d9f745a9fb320e4b4ee1c, type: 3}
