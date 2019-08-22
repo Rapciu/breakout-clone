@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int[] noGameSceneIndexes;
 
     //Game State Variables
-    [SerializeField] int currentPoints = 0;
+    [SerializeField] public int currentPoints = 0;
     [SerializeField] float timer = 0f;
 
     SceneLoader sceneLoaderComp;
@@ -49,11 +49,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    bool isNoGameScene(Scene scene)
+    {
+        return System.Array.Exists(noGameSceneIndexes, index => index == scene.buildIndex);
+    }
+
     void ManageCanvas(Scene scene)
     {
-        bool isNoGUIScene = System.Array.Exists(noGameSceneIndexes, index => index == scene.buildIndex);
-
-        if (isNoGUIScene)
+        if (isNoGameScene(scene))
         {
             gameCanvas.SetActive(false);
             showGUI = false;
@@ -66,6 +69,14 @@ public class GameManager : MonoBehaviour
             updateTimer = true;
 
             UpdateAndDisplayLvlNum(scene);
+        }
+    }
+
+    void ResetGameStats(Scene scene)
+    {
+        if (isNoGameScene(scene))
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -130,11 +141,18 @@ public class GameManager : MonoBehaviour
         scoreTextComp.text = currentPoints.ToString();
     }
 
-    private void DisplayTimer()
+    public (int minutes, int seconds) GetConvertedTime()
     {
         int minutes = (int)timer / 60;
         int seconds = (int)Mathf.Round(timer % 60);
         //float miliseconds = (timer - (minutes / 60 + (int)seconds)) * 1000; breaks after 1 minute, fix later
+
+        return (minutes, seconds);
+    }
+
+    private void DisplayTimer()
+    {
+        (int minutes, int seconds) = GetConvertedTime();
 
         //int secondsRounded = (int)Mathf.Round(seconds);
         //int milisecondsRounded = (int)Mathf.Round(miliseconds);
@@ -164,6 +182,7 @@ public class GameManager : MonoBehaviour
     {
         // Delegates the OnSceneLoaded as a event listener for when the scenes change
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
     //Event listener for scene load
@@ -171,6 +190,13 @@ public class GameManager : MonoBehaviour
     {
         //Debug.Log($"Loaded scene: {scene.name} {scene.buildIndex}, mode: {mode}");
         ManageCanvas(scene);
+    }
+
+    //Event listener for scene unload
+    void OnSceneUnloaded(Scene scene)
+    {
+        //Debug.Log($"Loaded scene: {scene.name} {scene.buildIndex}, mode: {mode}");
+        ResetGameStats(scene);
     }
 
     void Start()
@@ -206,5 +232,6 @@ public class GameManager : MonoBehaviour
     {
         //Undelegates the OnSceneLoaded when the game exists
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 }
