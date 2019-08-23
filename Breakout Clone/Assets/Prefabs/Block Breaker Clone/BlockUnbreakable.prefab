@@ -144,4 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: {fileID: 8057011575001004520, guid: 931b0bd43077edd4a973862b4d3f552d, type: 3}
   breakable: 0
+  spin: 0
+  spinSpeed: 1
+  breakEffect: {fileID: 3398978284689535598, guid: 61dd12e181833c147a0d068084693df9,
+    type: 3}
   breakSounds: []

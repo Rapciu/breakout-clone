@@ -11,14 +11,33 @@ public class Block : MonoBehaviour
     [SerializeField] bool spin = false;
     [Range(1f, 360f)] [SerializeField] float spinSpeed = 1f;
 
+    [SerializeField] GameObject breakEffect;
     [SerializeField] AudioClip[] breakSounds;
 
     GameManager gameManagerComp;
     Level levelComp;
+    ParticleSystem breakEffectPSComp;
+    ParticleSystem.MainModule breakEffectPSMain;
 
     Rigidbody2D rb;
+    SpriteRenderer sr;
 
     float angle;
+
+    private void TriggerBreakEffect()
+    {
+        //TODO: Rewrite it so it doesn't change the prefab color directly
+        breakEffectPSMain.startColor = sr.color;
+        GameObject instantiatedBreakEffect = Instantiate(breakEffect, transform.position, transform.rotation);
+
+        Destroy(instantiatedBreakEffect, 5);
+    }
+
+    private void TriggerBreakSound()
+    {
+        AudioClip clip = breakSounds[Random.Range(0, breakSounds.Length)];
+        AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, 0.25f);
+    }
 
     private void DestroyBlock()
     {
@@ -29,10 +48,11 @@ public class Block : MonoBehaviour
             gameManagerComp.DisplayScore();
         }
 
-        AudioClip clip = breakSounds[Random.Range(0, breakSounds.Length)];
-        AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, 0.25f);
+        TriggerBreakSound();
 
         Destroy(gameObject);
+
+        TriggerBreakEffect();
     }
 
     private void Spin()
@@ -53,8 +73,12 @@ public class Block : MonoBehaviour
     {
         gameManagerComp = FindObjectOfType<GameManager>();
         levelComp = level.GetComponent<Level>();
+        breakEffectPSComp = breakEffect.GetComponent<ParticleSystem>();
+
+        breakEffectPSMain = breakEffectPSComp.main;
 
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
         angle = Random.Range(0, 90);
     }

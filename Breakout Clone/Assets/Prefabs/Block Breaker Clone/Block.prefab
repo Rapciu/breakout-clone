@@ -146,6 +146,8 @@ MonoBehaviour:
   breakable: 1
   spin: 0
   spinSpeed: 2
+  breakEffect: {fileID: 3398978284689535598, guid: 61dd12e181833c147a0d068084693df9,
+    type: 3}
   breakSounds:
   - {fileID: 8300000, guid: 1b5381ee8657c584ba6418d5e6f3ec0e, type: 3}
   - {fileID: 8300000, guid: 06fd73697a3d9f745a9fb320e4b4ee1c, type: 3}
