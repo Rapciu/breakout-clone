@@ -72,12 +72,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ResetGameStats(Scene scene)
+    void ResetGameStats()
     {
-        if (isNoGameScene(scene))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     private void PauseGame()
@@ -102,6 +99,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             sceneLoaderComp.LoadScene(0);
+            ResetGameStats();
         }
     }
 
@@ -196,7 +194,11 @@ public class GameManager : MonoBehaviour
     void OnSceneUnloaded(Scene scene)
     {
         //Debug.Log($"Loaded scene: {scene.name} {scene.buildIndex}, mode: {mode}");
-        ResetGameStats(scene);
+        
+        if (isNoGameScene(scene))
+        {
+            ResetGameStats();
+        }
     }
 
     void Start()
