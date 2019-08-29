@@ -16,8 +16,8 @@ public class Block : MonoBehaviour
 
     GameManager gameManagerComp;
     Level levelComp;
-    ParticleSystem breakEffectPSComp;
-    ParticleSystem.MainModule breakEffectPSMain;
+    //ParticleSystem breakEffectPSComp;
+    //ParticleSystem.MainModule breakEffectPSMain;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -26,9 +26,14 @@ public class Block : MonoBehaviour
 
     private void TriggerBreakEffect()
     {
-        //TODO: Rewrite it so it doesn't change the prefab color directly
-        breakEffectPSMain.startColor = sr.color;
+        //TODO: Rewrite it so it doesn't change the prefab color directly DONE
+        //breakEffectPSMain.startColor = sr.color;
         GameObject instantiatedBreakEffect = Instantiate(breakEffect, transform.position, transform.rotation);
+
+        ParticleSystem breakEffectPSComp = instantiatedBreakEffect.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule breakEffectPSMain = breakEffectPSComp.main;
+
+        breakEffectPSMain.startColor = sr.color;
 
         Destroy(instantiatedBreakEffect, 5);
     }
@@ -57,25 +62,22 @@ public class Block : MonoBehaviour
 
     private void Spin()
     {
-        if (spin)
+        if (rb.bodyType != RigidbodyType2D.Kinematic)
         {
-            if (rb.bodyType != RigidbodyType2D.Kinematic)
-            {
-                rb.bodyType = RigidbodyType2D.Kinematic;
-            }
-
-            rb.MoveRotation(angle);
-            angle += spinSpeed;
+            rb.bodyType = RigidbodyType2D.Kinematic;
         }
+
+        rb.MoveRotation(angle);
+        angle += spinSpeed;
     }
 
     private void Start()
     {
         gameManagerComp = FindObjectOfType<GameManager>();
         levelComp = level.GetComponent<Level>();
-        breakEffectPSComp = breakEffect.GetComponent<ParticleSystem>();
+        //breakEffectPSComp = breakEffect.GetComponent<ParticleSystem>();
 
-        breakEffectPSMain = breakEffectPSComp.main;
+        //breakEffectPSMain = breakEffectPSComp.main;
 
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -85,7 +87,10 @@ public class Block : MonoBehaviour
 
     private void Update()
     {
-        Spin();
+        if (spin)
+        {
+            Spin();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
