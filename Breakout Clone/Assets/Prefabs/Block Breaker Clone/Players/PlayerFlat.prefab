@@ -60,6 +60,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -199,5 +200,5 @@ MonoBehaviour:
   screenWidth: 32
   screenHeight: 18
   spriteWidth: 4
-  ballTransform: {fileID: 0}
+  ball: {fileID: 7473431196660378207, guid: 30597b1077910854298f65f1651d8fd6, type: 3}
   rb: {fileID: 0}

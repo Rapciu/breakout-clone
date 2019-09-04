@@ -5,8 +5,6 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     //[SerializeField] Transform playerTransComp;
-    [SerializeField] Player player;
-
     [SerializeField] float minVelocity = 10;
     [SerializeField] float maxVelocity = 25;
     [SerializeField] float launchPower = 25;
@@ -23,7 +21,9 @@ public class Ball : MonoBehaviour
     FixedJoint2D attachment;
     AudioSource collisionSound;
 
-    Vector2 ballOffset;
+    GameObject player;
+
+    Rigidbody2D playerRb;
 
     Vector2 velocityVector;
 
@@ -31,41 +31,26 @@ public class Ball : MonoBehaviour
 
     bool launched = false;
 
-    private void AttachToPaddle()
-    {
-        Vector2 ballPos = (Vector2)player.transform.position + ballOffset;
-        //transform.position = ballPos;
-        rb.MovePosition(ballPos);
-    }
+    //private void AttachToPaddle()
+    //{
+    //    Vector2 ballPos = (Vector2)player.transform.position + ballOffset;
+    //    //transform.position = ballPos;
+    //    rb.MovePosition(ballPos);
+    //}
 
-    //TODO: Move it to game manager script instead maybe
-    public void SpawnBall()
-    {
-        if (Input.GetMouseButtonDown(1) && launched)
-        {
-            GameObject ball = Instantiate(gameObject, (Vector2)player.transform.position + ballOffset, Quaternion.identity);
-            Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
-
-            LaunchBallUp(rb);
-        }
-    }
-
-    private void LaunchBallUp(Rigidbody2D rb)
+    public void LaunchBallUp()
     {
         rb.velocity = new Vector2(Random.Range(-launchAngleMaxOffset, launchAngleMaxOffset + 1), launchPower);
         //rb.AddForce(new Vector2(0, 200f));
-        collisionSound.PlayOneShot(launchSound);
     }
 
     //TODO: Move it to game manager script instead maybe
-    private void Launch()
+    public void Launch()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            launched = true;
-            attachment.enabled = false;
-            LaunchBallUp(rb);
-        }
+        launched = true;
+        attachment.enabled = false;
+        LaunchBallUp();
+        collisionSound.PlayOneShot(launchSound);
     }
 
     private void SetVelocity()
@@ -118,20 +103,31 @@ public class Ball : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         attachment = GetComponent<FixedJoint2D>();
         collisionSound = GetComponent<AudioSource>();
 
-        ballOffset = transform.position - player.transform.position;
+        player = FindObjectOfType<Player>().gameObject;
+
+        playerRb = player.GetComponent<Rigidbody2D>();
+
+        attachment.connectedBody = playerRb;
+        //attachment.anchor = new Vector2(0f, 2.5f);
+        //attachment.connectedAnchor = new Vector2(0f, 0f);
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        //rb = GetComponent<Rigidbody2D>();
+        
+        //ballOffset = transform.position - player.transform.position;
+    }
+
     void Update()
     {
-        if (!launched)
+        if (!launched && Input.GetMouseButtonDown(0))
         {
             //AttachToPaddle();
             Launch();
@@ -141,10 +137,11 @@ public class Ball : MonoBehaviour
     //Limits the ball velocity
     void FixedUpdate()
     {
-        SetVelocity();
-        UnstuckBall();
-
-        SpawnBall();
+        if (launched)
+        {
+            SetVelocity();
+            UnstuckBall();
+        }
 
         //Debug.Log($"x:{rb.velocity.x}\ny:{rb.velocity.y}");
     }

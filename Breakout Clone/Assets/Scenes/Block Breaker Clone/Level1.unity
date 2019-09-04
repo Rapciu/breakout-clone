@@ -2111,7 +2111,7 @@ Transform:
   - {fileID: 1181352753}
   - {fileID: 2125452250}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215142371
 GameObject:
@@ -2728,7 +2728,7 @@ PrefabInstance:
     - target: {fileID: 1458587482581567161, guid: 4610c4e827647c344a2fb95e77ff5eae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1458587482581567161, guid: 4610c4e827647c344a2fb95e77ff5eae,
         type: 3}
@@ -6998,7 +6998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &794943947
 GameObject:
@@ -22293,7 +22293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106228158
 GameObject:
@@ -23235,7 +23235,7 @@ PrefabInstance:
     - target: {fileID: 1712620963571775386, guid: 775d36ef78f4258429ed73a8dd19213c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1712620963571775386, guid: 775d36ef78f4258429ed73a8dd19213c,
         type: 3}
@@ -23373,7 +23373,7 @@ PrefabInstance:
     - target: {fileID: 4555529337297568254, guid: 2a94a64f7a4b7b04981e30303c2b4c9d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4555529337297568254, guid: 2a94a64f7a4b7b04981e30303c2b4c9d,
         type: 3}
@@ -23552,6 +23552,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_ConnectedRigidBody
+      value: 
+      objectReference: {fileID: 995989840}
     - target: {fileID: 7473431196660378207, guid: 30597b1077910854298f65f1651d8fd6,
         type: 3}
       propertyPath: m_Name
@@ -23612,11 +23616,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7473431196660378149, guid: 30597b1077910854298f65f1651d8fd6,
-        type: 3}
-      propertyPath: m_ConnectedRigidBody
-      value: 
-      objectReference: {fileID: 995989840}
     - target: {fileID: 7473431196660378148, guid: 30597b1077910854298f65f1651d8fd6,
         type: 3}
       propertyPath: playerBasic

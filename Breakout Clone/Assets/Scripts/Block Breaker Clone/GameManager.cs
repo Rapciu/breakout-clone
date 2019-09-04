@@ -226,8 +226,6 @@ public class GameManager : MonoBehaviour
             //DisplayScore();
             DisplayTimer();
         }
-
-        ballComp.SpawnBall();
     }
 
     private void OnDisable()
