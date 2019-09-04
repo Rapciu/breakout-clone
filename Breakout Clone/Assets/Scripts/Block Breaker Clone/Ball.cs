@@ -88,18 +88,23 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void ballCollision()
+    {
+        //collisionSound.clip = collisionSounds[Random.Range(0, collisionSounds.Length)];
+        //collisionSound.Play();
+
+        AudioClip clip = collisionSounds[Random.Range(0, collisionSounds.Length)];
+        collisionSound.pitch = Random.Range(0.5f, 1.5f);
+        collisionSound.PlayOneShot(clip);
+
+        rb.AddTorque(Random.Range(-10, 11));
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (launched)
         {
-            //collisionSound.clip = collisionSounds[Random.Range(0, collisionSounds.Length)];
-            //collisionSound.Play();
-
-            AudioClip clip = collisionSounds[Random.Range(0, collisionSounds.Length)];
-            collisionSound.pitch = Random.Range(0.5f, 1.5f);
-            collisionSound.PlayOneShot(clip);
-
-            rb.AddTorque(Random.Range(-10, 11));
+            ballCollision();
         }
     }
 
